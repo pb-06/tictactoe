@@ -8,17 +8,45 @@ function TicTacToe() {
   const [nextPlayer, setNextPlayer] = useState('X');
   const [winner, setWinner] = useState(null);
 
+  const API_URL = 'http://localhost:3333/api/results';
+
   const postResult = async (result) => {
-    // TODO - implement backend POST
-    await fetch('/api/result', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ result })
-    });
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ result })
+      });
+
+      if (!response.ok) {
+        throw new Error('Hiba a szerver válaszában');
+      }
+
+      const savedResult = await response.json();
+      console.log('Sikeresen mentve:', savedResult);
+    } catch (error) {
+      console.error('Hiba az eredmény mentésekor:', error);
+    }
   };
-  // TODO - implement backend GET: query previous match results
+
+  useEffect(() => {
+    const fetchPreviousResults = async () => {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          throw new Error('Hiba a szerver válaszában');
+        }
+        const results = await response.json();
+        console.log('Korábbi eredmények a szerverről:', results);
+      } catch (error) {
+        console.error('Hiba a korábbi eredmények lekérdezésekor:', error);
+      }
+    };
+
+    fetchPreviousResults();
+  }, []);
 
   const calculateWinner = (currentBoard) => {
     const lines = [
