@@ -20,62 +20,68 @@ function TicTacToe() {
   };
   // TODO - implement backend GET: query previous match results
 
-  const calculateWinner = function(board) {/* TODO - implement */}
+  const calculateWinner = function (board) {/* TODO - implement */ }
 
   const handleClick = (idx) => {
-    //TODO - if (board[idx] || winner) return;
+    if (board[idx] || winner) {
+      return;
+    }
+
     const newBoard = board.slice();
-    newBoard[idx] = 'X'; // TODO
-    
+    newBoard[idx] = nextPlayer;
+
     setBoard(newBoard);
-    setNextPlayer('O'); // TODO
+    const newNextPlayer = nextPlayer === 'X' ? 'O' : 'X';
+    setNextPlayer(newNextPlayer);
+
     const win = calculateWinner(newBoard);
     if (win) {
       setWinner(win);
-      //toast(`${win} wins!`);
-      //postResult(`${win} wins`);
+      toast.success(`${win} wins!`);
+      postResult(`${win} wins`);
     } else if (!newBoard.includes(null)) {
-      //toast('Draw!');
-      //postResult('Draw');
+      toast.info('Draw!');
+      postResult('Draw');
     }
   };
 
-  const handleRestart = () => {/* TODO */};
+  const handleRestart = () => {/* TODO */ };
 
   const handleSurrender = () => {
-    if (!winner) {/* TODO */}
+    if (!winner) {/* TODO */ }
   };
 
-return (
-  <div className="gameContainer">
-    <h1>TicTacToe!</h1>
-    <div className="grid">
-      {
-        [0,1,2].map(row => (
-          <div className="board-row" key={row}>
-            {[0,1,2].map(col => {
-              const idx = row * 3 + col;
-              return (
-                <button 
-                  key={idx}
-                  className="square" 
-                  
-                >
-                  {board[idx]}
-                </button>
-              );
-            })}
-          </div>
-        ))
-      }
+  return (
+    <div className="gameContainer">
+      <h1>TicTacToe!</h1>
+      <div className="grid">
+        {
+          [0, 1, 2].map(row => (
+            <div className="board-row" key={row}>
+              {[0, 1, 2].map(col => {
+                const idx = row * 3 + col;
+                return (
+                  <button
+                    key={idx}
+                    className="square"
+                    onClick={() => handleClick(idx)}
+                    disabled={winner || board[idx]}
+                  >
+                    {board[idx]}
+                  </button>
+                );
+              })}
+            </div>
+          ))
+        }
+      </div>
+      <div className="controls">
+        <button >Restart</button>
+        <button >Surrender</button>
+      </div>
+      {/*<ToastContainer position="top-center" />*/}
     </div>
-    <div className="controls">
-      <button >Restart</button>
-      <button >Surrender</button>
-    </div>
-    {/*<ToastContainer position="top-center" />*/}
-  </div>
-);
+  );
 }
 
 export default TicTacToe;
