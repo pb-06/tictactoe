@@ -106,3 +106,10 @@ h1 {
   background: #90caf9;
   color: #1e6091;
 }
+
+.status {
+  font-size: 1.5em;
+  margin: 20px;
+  color: black;
+  font-weight: bold;
+}
