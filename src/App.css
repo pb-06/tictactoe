@@ -72,13 +72,13 @@ h1 {
 .square {
   background: #fffde7;
   border: 2px solid #ffb300;
-  /* TODO - add border radius */
+  border-radius: 20px;
   width: 80px;
   height: 80px;
   font-size: 2.5rem;
   color: #4caf50;
   cursor: pointer;
-  /* TODO - add some shadow */
+  box-shadow: 5px 5px 5px 5px black;
   transition: background 0.2s, color 0.2s, filter 0.15s;
 }
 .square:hover {
@@ -105,4 +105,11 @@ h1 {
 .controls button:hover {
   background: #90caf9;
   color: #1e6091;
+}
+
+.status {
+  font-size: 1.5em;
+  margin: 20px;
+  color: black;
+  font-weight: bold;
 }
