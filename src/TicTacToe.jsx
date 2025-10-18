@@ -45,7 +45,11 @@ function TicTacToe() {
     }
   };
 
-  const handleRestart = () => {/* TODO */ };
+  const handleRestart = () => {
+    setBoard(Array(9).fill(null));
+    setNextPlayer('X');
+    setWinner(null);
+  };
 
   const handleSurrender = () => {
     if (!winner) {/* TODO */ }
@@ -76,7 +80,7 @@ function TicTacToe() {
         }
       </div>
       <div className="controls">
-        <button >Restart</button>
+        <button onClick={handleRestart}>Restart</button>
         <button >Surrender</button>
       </div>
       {/*<ToastContainer position="top-center" />*/}
