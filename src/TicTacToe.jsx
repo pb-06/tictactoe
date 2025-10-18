@@ -136,7 +136,10 @@ function TicTacToe() {
         <button onClick={handleRestart}>Restart</button>
         <button onClick={handleSurrender}>Surrender</button>
       </div>
-      {/*<ToastContainer position="top-center" />*/}
+      <div className="status">
+        {winner ? `A nyertes: ${winner}` : board.includes(null) ? `Következő játékos: ${nextPlayer}` : 'Döntetlen!'}
+      </div>
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
     </div>
   );
 }
