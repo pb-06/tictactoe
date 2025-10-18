@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-// TODO - npm install express cors react-toastify
-//import { toast, ToastContainer } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css';
-import './App.css'; // with custom childish styles
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 function TicTacToe() {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -55,14 +54,14 @@ return (
         [0,1,2].map(row => (
           <div className="board-row" key={row}>
             {[0,1,2].map(col => {
-              const idx = row * col // TODO - recalculate button address index
+              const idx = row * 3 + col;
               return (
                 <button 
-                  key="idx" 
+                  key={idx}
                   className="square" 
                   
                 >
-                  {board?.idx} {/* TODO */}
+                  {board[idx]}
                 </button>
               );
             })}
