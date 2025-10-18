@@ -52,7 +52,14 @@ function TicTacToe() {
   };
 
   const handleSurrender = () => {
-    if (!winner) {/* TODO */ }
+    if (!winner) {
+      const surrenderingPlayer = nextPlayer;
+      const winningPlayer = surrenderingPlayer === 'X' ? 'O' : 'X';
+      setWinner(winningPlayer);
+      const resultMessage = `${surrenderingPlayer} feladta, ${winningPlayer} nyert!`;
+      toast.warning(resultMessage);
+      postResult(resultMessage);
+    }
   };
 
   return (
@@ -81,7 +88,7 @@ function TicTacToe() {
       </div>
       <div className="controls">
         <button onClick={handleRestart}>Restart</button>
-        <button >Surrender</button>
+        <button onClick={handleSurrender}>Surrender</button>
       </div>
       {/*<ToastContainer position="top-center" />*/}
     </div>
